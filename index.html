@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mksbeasy | فيديوهات قصيرة • إعلانات • روابط</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts: Cairo & Tajawal for Arabic, Plus Jakarta Sans & Inter for English -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Tajawal:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              emerald: '#10b981',
+              teal: '#0d9488',
+              gold: '#f59e0b',
+              amber: '#fbbf24',
+              dark: '#070d0c',
+              surface: '#0e1816',
+              card: '#13201d',
+              border: '#1f3530'
+            }
+          },
+          fontFamily: {
+            ar: ['Cairo', 'Tajawal', 'sans-serif'],
+            en: ['Plus Jakarta Sans', 'Inter', 'sans-serif']
+          },
+          boxShadow: {
+            glow: '0 0 30px -5px rgba(16, 185, 129, 0.25)',
+            goldGlow: '0 0 25px -5px rgba(245, 158, 11, 0.25)'
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body[dir="rtl"] {
+      font-family: 'Cairo', 'Tajawal', sans-serif;
+    }
+
+    body[dir="ltr"] {
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    }
+
+    /* Subtle background grid & gradient mesh */
+    .bg-mesh-dark {
+      background-color: #070d0c;
+      background-image:
+        radial-gradient(at 15% 12%, rgba(16, 185, 129, 0.14) 0px, transparent 50%),
+        radial-gradient(at 85% 18%, rgba(245, 158, 11, 0.10) 0px, transparent 48%),
+        radial-gradient(at 50% 90%, rgba(13, 148, 136, 0.12) 0px, transparent 55%);
+    }
+
+    .bg-mesh-light {
+      background-color: #f4f8f7;
+      background-image:
+        radial-gradient(at 12% 10%, rgba(16, 185, 129, 0.11) 0px, transparent 50%),
+        radial-gradient(at 88% 15%, rgba(245, 158, 11, 0.10) 0px, transparent 48%),
+        radial-gradient(at 50% 92%, rgba(13, 148, 136, 0.08) 0px, transparent 55%);
+    }
+
+    @keyframes pulseBar {
+      0%, 100% { transform: scaleY(0.35); }
+      50% { transform: scaleY(1); }
+    }
+
+    .eq-bar {
+      transform-origin: bottom;
+      animation: pulseBar 1s ease-in-out infinite;
+    }
+
+    .eq-bar:nth-child(2) { animation-delay: 0.2s; }
+    .eq-bar:nth-child(3) { animation-delay: 0.4s; }
+    .eq-bar:nth-child(4) { animation-delay: 0.15s; }
+  </style>
+</head>
+
+<body id="appBody" class="dark bg-mesh-dark text-slate-100 min-h-screen transition-colors duration-300 selection:bg-emerald-500/30 selection:text-emerald-200">
+
+  <!-- Toast Notification Container -->
+  <div
+    id="toastContainer"
+    class="fixed bottom-5 start-5 z-[90] flex flex-col gap-2 pointer-events-none max-w-sm w-[92vw] sm:w-auto"
+    aria-live="polite"
+  ></div>
+
+  <!-- Top Navigation Bar -->
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-[#070d0c]/85 dark:bg-[#070d0c]/85 border-b border-emerald-900/50 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between gap-3">
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-2.5 group shrink-0">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 via-teal-500 to-amber-400 p-[1.5px] shadow-glow group-hover:scale-105 transition-transform">
+          <div class="w-full h-full rounded-[10.5px] bg-[#091210] flex items-center justify-center">
+            <svg class="w-5 h-5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              <path d="M19 6v12" stroke="#fbbf24"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-lg sm:text-xl font-extrabold tracking-tight text-white leading-none">
+            mksb<span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-amber-300">easy</span>
+          </span>
+          <span id="navTagline" class="text-[11px] text-emerald-300/80 mt-0.5 font-medium truncate max-w-[170px] sm:max-w-none">
+            فيديوهات قصيرة • إعلانات • روابط
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
+        <a href="#videos-section" data-i18n="navVideos" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-emerald-500/10 transition-colors">
+          الفيديوهات القصيرة
+        </a>
+        <a href="#ads-section" data-i18n="navAds" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-amber-500/10 transition-colors">
+          الإعلانات والعروض
+        </a>
+        <a href="#links-section" data-i18n="navLinks" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-teal-500/10 transition-colors">
+          الروابط
+        </a>
+        <button
+          type="button"
+          onclick="openManagerModal()"
+          data-i18n="navManage"
+          class="px-3.5 py-2 rounded-xl text-sm font-semibold text-amber-300 hover:text-amber-200 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-400/25 transition-all cursor-pointer"
+        >
+          إضافة عنصر / تخصيص
+        </button>
+      </nav>
+
+      <!-- Right Controls: Theme & Language Switcher -->
+      <div class="flex items-center gap-2 shrink-0">
+        <!-- Theme Toggle -->
+        <button
+          type="button"
+          id="themeToggleBtn"
+          onclick="toggleTheme()"
+          title="Toggle Theme"
+          class="p-2.5 rounded-xl bg-[#11201d] hover:bg-[#172b27] border border-emerald-800/50 text-emerald-300 hover:text-amber-300 transition-colors cursor-pointer"
+        >
+          <svg id="sunIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+          </svg>
+          <svg id="moonIcon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Language Switcher (العربية | English) -->
+        <button
+          type="button"
+          id="langToggleBtn"
+          onclick="toggleLanguage()"
+          class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-gradient-to-r from-emerald-500/15 to-teal-500/15 hover:from-emerald-500/25 hover:to-teal-500/25 border border-emerald-400/35 text-xs sm:text-sm font-bold text-emerald-200 transition-all cursor-pointer"
+        >
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span id="langSwitchLabel">العربية | English</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Quick Scroll Bar -->
+    <div class="flex lg:hidden items-center gap-1.5 px-4 py-2 overflow-x-auto border-t border-emerald-900/40 bg-[#091210]/90 text-xs font-semibold">
+      <a href="#videos-section" data-i18n="navVideos" class="px-3 py-1.5 rounded-lg bg-emerald-500/10 text-emerald-300 whitespace-nowrap">الفيديوهات القصيرة</a>
+      <a href="#ads-section" data-i18n="navAds" class="px-3 py-1.5 rounded-lg bg-amber-500/10 text-amber-300 whitespace-nowrap">الإعلانات والعروض</a>
+      <a href="#links-section" data-i18n="navLinks" class="px-3 py-1.5 rounded-lg bg-teal-500/10 text-teal-300 whitespace-nowrap">الروابط</a>
+      <button type="button" onclick="openManagerModal()" data-i18n="navManageShort" class="px-3 py-1.5 rounded-lg bg-white/10 text-white whitespace-nowrap cursor-pointer">+ إضافة عنصر</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden pt-10 pb-12 sm:pt-16 sm:pb-16 border-b border-emerald-900/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+        <!-- Hero Text -->
+        <div class="lg:col-span-7 space-y-5">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-400/25 text-emerald-300 text-xs sm:text-sm font-semibold">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span data-i18n="heroBadge">منصة موحدة للمحتوى السريع والعروض والروابط</span>
+          </div>
+
+          <h1 id="heroTitle" class="text-3xl sm:text-5xl lg:text-[3.35rem] font-extrabold tracking-tight leading-[1.2] text-white">
+            كل <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-amber-300">الفيديوهات القصيرة والإعلانات والروابط</span> في مكان واحد سهل
+          </h1>
+
+          <p id="heroSubtitle" class="text-base sm:text-lg text-slate-300/90 leading-relaxed max-w-2xl">
+            استعرض مقاطع الفيديو السريعة، واكتشف العروض والإعلانات المميزة، واحصل على أهم الروابط بنقرة واحدة مع إمكانية إضافة وتخصيص محتواك بسهولة وحفظه تلقائياً.
+          </p>
+
+          <!-- Quick Action Buttons -->
+          <div class="flex flex-wrap items-center gap-3 pt-1">
+            <a
+              href="#videos-section"
+              class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold text-sm shadow-glow transition-all"
+            >
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <span data-i18n="ctaVideos">استكشف الفيديوهات</span>
+            </a>
+
+            <a
+              href="#ads-section"
+              class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/40 text-amber-200 font-bold text-sm transition-all"
+            >
+              <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+              <span data-i18n="ctaAds">تصفح الإعلانات</span>
+            </a>
+
+            <a
+              href="#links-section"
+              class="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-[#12221f] hover:bg-[#182c28] border border-emerald-800/60 text-slate-200 font-bold text-sm transition-all"
+            >
+              <svg class="w-4 h-4 text-teal-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+              <span data-i18n="ctaLinks">جميع الروابط</span>
+            </a>
+
+            <button
+              type="button"
+              onclick="openManagerModal()"
+              class="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-white font-bold text-sm transition-all cursor-pointer"
+            >
+              <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              <span data-i18n="ctaCustomize">تخصيص / إضافة محتوى</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Hero Live Hub Preview Card -->
+        <div class="lg:col-span-5">
+          <div class="rounded-2xl bg-gradient-to-b from-[#132320] to-[#0c1614] border border-emerald-700/40 p-5 sm:p-6 shadow-2xl relative overflow-hidden">
+            <div class="absolute -top-16 -end-16 w-44 h-44 rounded-full bg-emerald-500/15 blur-2xl pointer-events-none"></div>
+            <div class="absolute -bottom-16 -start-16 w-44 h-44 rounded-full bg-amber-500/15 blur-2xl pointer-events-none"></div>
+
+            <div class="flex items-center justify-between border-b border-emerald-900/60 pb-3.5 mb-4">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                <span class="text-xs font-bold uppercase tracking-wider text-emerald-300" data-i18n="hubLiveLabel">مركز mksbeasy المباشر</span>
+              </div>
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-400/25 font-semibold" data-i18n="bilingualBadge">
+                AR / EN
+              </span>
+            </div>
+
+            <!-- Live Counters -->
+            <div class="grid grid-cols-3 gap-3 mb-4">
+              <div class="rounded-xl bg-[#091210]/90 border border-emerald-900/50 p-3 text-center">
+                <div id="countVideos" class="text-xl sm:text-2xl font-extrabold text-emerald-400">0</div>
+                <div class="text-[11px] text-slate-400 mt-0.5 font-medium" data-i18n="statVideos">فيديوهات</div>
+              </div>
+              <div class="rounded-xl bg-[#091210]/90 border border-amber-900/40 p-3 text-center">
+                <div id="countAds" class="text-xl sm:text-2xl font-extrabold text-amber-400">0</div>
+                <div class="text-[11px] text-slate-400 mt-0.5 font-medium" data-i18n="statAds">إعلانات</div>
+              </div>
+              <div class="rounded-xl bg-[#091210]/90 border border-teal-900/50 p-3 text-center">
+                <div id="countLinks" class="text-xl sm:text-2xl font-extrabold text-teal-300">0</div>
+                <div class="text-[11px] text-slate-400 mt-0.5 font-medium" data-i18n="statLinks">روابط</div>
+              </div>
+            </div>
+
+            <!-- Quick Spotlight Item -->
+            <div class="rounded-xl bg-[#091210]/80 border border-emerald-800/40 p-3.5 flex items-center justify-between gap-3">
+              <div class="min-w-0">
+                <p class="text-[11px] text-amber-300/90 font-semibold" data-i18n="spotlightLabel">نقر الإعلانات المسجل (محلي)</p>
+                <p class="text-sm font-bold text-white mt-0.5 truncate" id="totalAdClicksDisplay">0 نقرة إجمالية</p>
+              </div>
+              <button
+                type="button"
+                onclick="openManagerModal()"
+                class="shrink-0 px-3 py-2 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 text-xs font-bold border border-emerald-500/30 transition cursor-pointer"
+                data-i18n="addQuickBtn"
+              >
+                + إضافة
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Filter & Search Bar -->
+  <section class="sticky top-16 lg:top-18 z-30 backdrop-blur-xl bg-[#091311]/90 border-b border-emerald-900/50 py-3.5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+      <!-- Filter Tabs -->
+      <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 md:pb-0">
+        <button
+          type="button"
+          data-filter="all"
+          onclick="setFilter('all')"
+          class="filter-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap cursor-pointer bg-emerald-500 text-slate-950 shadow-glow"
+          data-i18n="filterAll"
+        >
+          الكل
+        </button>
+        <button
+          type="button"
+          data-filter="video"
+          onclick="setFilter('video')"
+          class="filter-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap cursor-pointer bg-[#12221f] text-slate-300 hover:text-white border border-emerald-900/60"
+          data-i18n="filterVideos"
+        >
+          فيديوهات قصيرة
+        </button>
+        <button
+          type="button"
+          data-filter="ad"
+          onclick="setFilter('ad')"
+          class="filter-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap cursor-pointer bg-[#12221f] text-slate-300 hover:text-white border border-emerald-900/60"
+          data-i18n="filterAds"
+        >
+          إعلانات
+        </button>
+        <button
+          type="button"
+          data-filter="link"
+          onclick="setFilter('link')"
+          class="filter-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap cursor-pointer bg-[#12221f] text-slate-300 hover:text-white border border-emerald-900/60"
+          data-i18n="filterLinks"
+        >
+          روابط
+        </button>
+      </div>
+
+      <!-- Search Input -->
+      <div class="relative md:w-80 lg:w-96">
+        <input
+          type="text"
+          id="searchInput"
+          oninput="handleSearch(this.value)"
+          placeholder="ابحث في الفيديوهات، الإعلانات، أو الروابط..."
+          class="w-full ps-10 pe-9 py-2.5 rounded-xl bg-[#0e1b18] border border-emerald-800/60 focus:border-emerald-400 focus:outline-none text-sm text-white placeholder-slate-400 transition-colors"
+        />
+        <svg class="w-4 h-4 text-emerald-400 absolute top-1/2 -translate-y-1/2 start-3.5 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <button
+          type="button"
+          id="clearSearchBtn"
+          onclick="clearSearch()"
+          class="hidden absolute top-1/2 -translate-y-1/2 end-2.5 text-slate-400 hover:text-white p-1 cursor-pointer"
+          aria-label="Clear search"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-16">
+
+    <!-- Empty Search / Filter State -->
+    <div id="emptyState" class="hidden rounded-2xl bg-[#111f1c] border border-emerald-900/60 p-10 text-center space-y-3">
+      <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mx-auto">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </div>
+      <h3 class="text-lg font-bold text-white" data-i18n="noResultsTitle">لا توجد عناصر مطابقة لبحثك</h3>
+      <p class="text-sm text-slate-400 max-w-md mx-auto" data-i18n="noResultsDesc">جرّب كلمات بحث أخرى أو ارجع إلى تبويب «الكل» لاستعراض كافة العناصر المتاحة.</p>
+      <button
+        type="button"
+        onclick="resetFilters()"
+        class="mt-2 px-4 py-2 rounded-xl bg-emerald-500 text-slate-950 font-bold text-sm hover:bg-emerald-400 transition cursor-pointer"
+        data-i18n="resetFilterBtn"
+      >
+        إعادة ضبط الفلاتر
+      </button>
+    </div>
+
+    <!-- 1. Short Videos Section -->
+    <section id="videos-section" class="scroll-mt-32 space-y-6">
+      <div class="flex flex-wrap items-end justify-between gap-3 border-b border-emerald-900/50 pb-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-400" data-i18n="videosKicker">مقاطع سريعة</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1" data-i18n="videosHeading">الفيديوهات القصيرة</h2>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-400" data-i18n="videosSub">اضغط على أي فيديو لتشغيل المعاينة الفورية أو فتح الرابط المباشر</p>
+      </div>
+      <div id="videosGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+
+    <!-- 2. Ads & Featured Promotions Section -->
+    <section id="ads-section" class="scroll-mt-32 space-y-6">
+      <div class="flex flex-wrap items-end justify-between gap-3 border-b border-amber-900/40 pb-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-400" data-i18n="adsKicker">عروض مختارة</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1" data-i18n="adsHeading">الإعلانات والعروض</h2>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-400" data-i18n="adsSub">إعلانات وعروض مميزة مع تتبع محلي لعدد النقرات</p>
+      </div>
+      <div id="adsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+
+    <!-- 3. Links Directory Section -->
+    <section id="links-section" class="scroll-mt-32 space-y-6">
+      <div class="flex flex-wrap items-end justify-between gap-3 border-b border-teal-900/50 pb-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-teal-400" data-i18n="linksKicker">دليل الوصول السريع</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1" data-i18n="linksHeading">الروابط</h2>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-400" data-i18n="linksSub">انسخ الرابط بنقرة واحدة أو افتحه مباشرة في نافذة جديدة</p>
+      </div>
+      <div id="linksGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-emerald-900/50 bg-[#060b0a] mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        <div class="space-y-2.5">
+          <div class="text-xl font-extrabold text-white">
+            mksb<span class="text-emerald-400">easy</span>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed" data-i18n="footerDesc">
+            منصة بسيطة وسريعة لتنظيم الفيديوهات القصيرة والإعلانات والروابط باللغتين العربية والإنجليزية.
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-sm font-bold text-white" data-i18n="footerQuickLinks">روابط سريعة</h3>
+          <div class="flex flex-wrap gap-3 text-sm text-slate-400">
+            <a href="#videos-section" class="hover:text-emerald-400 transition" data-i18n="navVideos">الفيديوهات القصيرة</a>
+            <span>•</span>
+            <a href="#ads-section" class="hover:text-amber-400 transition" data-i18n="navAds">الإعلانات والعروض</a>
+            <span>•</span>
+            <a href="#links-section" class="hover:text-teal-400 transition" data-i18n="navLinks">الروابط</a>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-sm font-bold text-amber-300" data-i18n="footerDisclaimerTitle">إفصاح الإعلانات والروابط</h3>
+          <p class="text-xs text-slate-400 leading-relaxed" data-i18n="footerDisclaimerText">
+            قد تتضمن بعض الروابط أو البطاقات مواد ترويجية أو إعلانات خارجية؛ يُرجى مراجعة شروط كل منصة قبل استخدامها.
+          </p>
+        </div>
+      </div>
+
+      <div class="border-t border-emerald-950 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+        <span data-i18n="footerCopyright">© 2026 mksbeasy. جميع الحقوق محفوظة.</span>
+        <span data-i18n="footerStorageNote">يتم حفظ العناصر المضافة وإحصاءات النقرات محلياً في متصفحك.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Video Preview Modal -->
+  <div
+    id="videoModal"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div class="w-full max-w-2xl rounded-2xl bg-[#0e1917] border border-emerald-700/50 shadow-2xl overflow-hidden">
+      <div class="flex items-center justify-between px-5 py-3.5 border-b border-emerald-900/60">
+        <div class="flex items-center gap-2 min-w-0">
+          <span class="px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-300 text-xs font-bold" id="modalVideoDuration">0:30</span>
+          <h3 id="modalVideoTitle" class="text-sm sm:text-base font-bold text-white truncate"></h3>
+        </div>
+        <button
+          type="button"
+          onclick="closeVideoModal()"
+          class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition cursor-pointer"
+          aria-label="Close modal"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div id="videoPlayerContainer" class="bg-black aspect-video w-full relative flex items-center justify-center"></div>
+
+      <div class="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <p id="modalVideoDesc" class="text-sm text-slate-300 leading-relaxed"></p>
+        <a
+          id="modalVideoExternalLink"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="shrink-0 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs sm:text-sm transition"
+        >
+          <span data-i18n="openExternalBtn">فتح الرابط الخارجي</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Manager Modal (Add Video / Ad / Link + Reset) -->
+  <div
+    id="managerModal"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div class="w-full max-w-2xl rounded-2xl bg-[#0e1917] border border-emerald-700/50 shadow-2xl my-auto overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-emerald-900/60 bg-[#11211e]">
+        <div>
+          <h3 class="text-lg font-extrabold text-white" data-i18n="managerTitle">إضافة عنصر جديد / تخصيص المحتوى</h3>
+          <p class="text-xs text-slate-400 mt-0.5" data-i18n="managerSubtitle">أضف فيديو قصير، إعلان، أو رابط وسيتم حفظه تلقائياً في متصفحك</p>
+        </div>
+        <button
+          type="button"
+          onclick="closeManagerModal()"
+          class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition cursor-pointer"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <form id="addItemForm" onsubmit="handleAddItem(event)" class="p-6 space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Type -->
+          <div>
+            <label class="block text-xs font-bold text-emerald-300 mb-1.5" data-i18n="fieldType">نوع العنصر</label>
+            <select
+              id="itemType"
+              onchange="updateFormHints()"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-[#091210] border border-emerald-800/70 text-sm text-white focus:border-emerald-400 focus:outline-none"
+            >
+              <option value="video" data-i18n="typeVideo">فيديو قصير (Short Video)</option>
+              <option value="ad" data-i18n="typeAd">إعلان / عرض مميز (Ad / Offer)</option>
+              <option value="link" data-i18n="typeLink">رابط (Link)</option>
+            </select>
+          </div>
+
+          <!-- Duration / Badge -->
+          <div>
+            <label id="badgeLabel" class="block text-xs font-bold text-amber-300 mb-1.5" data-i18n="fieldDurationOrBadge">المدة أو الوسم (مثال: 0:30 أو مميز)</label>
+            <input
+              type="text"
+              id="itemBadge"
+              placeholder="0:30"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-[#091210] border border-emerald-800/70 text-sm text-white placeholder-slate-500 focus:border-emerald-400 focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Arabic Title -->
+          <div>
+            <label class="block text-xs font-bold text-slate-200 mb-1.5" data-i18n="fieldTitleAr">العنوان بالعربية *</label>
+            <input
+              type="text"
+              id="itemTitleAr"
+              required
+              placeholder="مثال: شرح سريع لبدء الكسب"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-[#091210] border border-emerald-800/70 text-sm text-white placeholder-slate-500 focus:border-emerald-400 focus:outline-none"
+            />
+          </div>
+
+          <!-- English Title -->
+          <div>
+            <label class="block text-xs font-bold text-slate-200 mb-1.5" data-i18n="fieldTitleEn">Title in English *</label>
+            <input
+              type="text"
+              id="itemTitleEn"
+              required
+              placeholder="e.g. Quick Starter Guide"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-[#091210] border border-emerald-800/70 text-sm text-white placeholder-slate-500 focus:border-emerald-400 focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Arabic Description -->
+          <div>
+            <label class="block text-xs font-bold text-slate-200 mb-1.5" data-i18n="fieldDescAr">الوصف بالعربية</label>
+            <textarea
+              id="itemDescAr"
+              rows="2"
+              placeholder="وصف مختصر وواضح للعنصر..."
+              class="w-full px-3.5 py-2.5 rounded-xl bg-[#091210] border border-emerald-800/70 text-sm text-white placeholder-slate-500 focus:border-emerald-400 focus:outline-none"
+            ></textarea>
+          </div>
+
+          <!-- English Description -->
+          <div>
+            <label class="block text-xs font-bold text-slate-200 mb-1.5" data-i18n="fieldDescEn">Description in English</label>
+            <textarea
+              id="itemDescEn"
+              rows="2"
+              placeholder="Short and clear description..."
+              class="w-full px-3.5 py-2.5 rounded-xl bg-[#091210] border border-emerald-800/70 text-sm text-white placeholder-slate-500 focus:border-emerald-400 focus:outline-none"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- URL -->
+        <div>
+          <label class="block text-xs font-bold text-emerald-300 mb-1.5" data-i18n="fieldUrl">الرابط (URL - اختياري للمعاينة التجريبية)</label>
+          <input
+            type="url"
+            id="itemUrl"
+            placeholder="https://example.com"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-[#091210] border border-emerald-800/70 text-sm text-white placeholder-slate-500 focus:border-emerald-400 focus:outline-none"
+          />
+        </div>
+
+        <div class="pt-3 border-t border-emerald-900/60 flex flex-wrap items-center justify-between gap-3">
+          <button
+            type="button"
+            onclick="resetSampleData()"
+            class="px-4 py-2.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 text-xs sm:text-sm font-bold transition cursor-pointer"
+            data-i18n="resetSampleBtn"
+          >
+            استعادة البيانات الافتراضية
+          </button>
+
+          <div class="flex items-center gap-2">
+            <button
+              type="button"
+              onclick="closeManagerModal()"
+              class="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs sm:text-sm font-bold transition cursor-pointer"
+              data-i18n="cancelBtn"
+            >
+              إلغاء
+            </button>
+            <button
+              type="submit"
+              class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 text-xs sm:text-sm font-extrabold shadow-glow transition cursor-pointer"
+              data-i18n="saveItemBtn"
+            >
+              حفظ العنصر
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. Default Bilingual Sample Data (Short Videos, Ads, and Curated Links)
+    // =========================================================================
+    const DEFAULT_ITEMS = [
+      // Short Videos
+      {
+        id: 'vid-1',
+        type: 'video',
+        duration: '0:25',
+        tagAr: 'مقدمة سريعة',
+        tagEn: 'Quick Intro',
+        titleAr: 'كيف تبدأ على mksbeasy في أقل من دقيقة',
+        titleEn: 'How to Start on mksbeasy in Under a Minute',
+        descAr: 'نظرة سريعة على أقسام الفيديوهات القصيرة، العروض الترويجية، والروابط المباشرة وكيفية الاستفادة منها.',
+        descEn: 'A quick walkthrough of short videos, featured promotions, and direct links and how to use them smoothly.',
+        url: 'https://www.youtube.com/watch?v=aqz-KE-bpKQ',
+        highlightTextAr: 'نصيحة سريعة: ركّز على المهام الواضحة وتابع التحديثات اليومية.',
+        highlightTextEn: 'Pro tip: Focus on clear tasks and check daily updates.'
+      },
+      {
+        id: 'vid-2',
+        type: 'video',
+        duration: '0:40',
+        tagAr: 'نصائح عملية',
+        tagEn: 'Practical Tips',
+        titleAr: 'أفضل 3 عادات لتنظيم الروابط والعروض اليومية',
+        titleEn: 'Top 3 Habits to Organize Daily Links & Offers',
+        descAr: 'خطوات بسيطة لتجنب الروابط العشوائية والتركيز على المنصات الموثوقة والمصادر المنظمة.',
+        descEn: 'Simple steps to avoid random links and stay focused on organized, reliable sources.',
+        url: 'https://www.youtube.com/watch?v=jNQXAC9IVRw',
+        highlightTextAr: 'الترتيب والوضوح يوفران وقتك ويحسّنان نتائجك.',
+        highlightTextEn: 'Clarity and structure save time and improve consistency.'
+      },
+      {
+        id: 'vid-3',
+        type: 'video',
+        duration: '0:15',
+        tagAr: 'تنبيه مهم',
+        tagEn: 'Key Alert',
+        titleAr: 'تحقق دائماً من شروط الإعلان قبل الاشتراك',
+        titleEn: 'Always Check Offer Terms Before Joining',
+        descAr: 'لماذا يُنصح بقراءة متطلبات كل عرض أو إعلان بدقة لضمان تجربة سلسة وشفافة.',
+        descEn: 'Why reviewing every ad or offer requirement carefully ensures a smooth, transparent experience.',
+        url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        highlightTextAr: 'الشفافية والاطلاع المسبق أساس أي تجربة ناجحة.',
+        highlightTextEn: 'Transparency and upfront review power every good experience.'
+      },
+
+      // Ads & Featured Promotions
+      {
+        id: 'ad-1',
+        type: 'ad',
+        badgeType: 'featured',
+        badgeAr: 'مميز',
+        badgeEn: 'Featured',
+        titleAr: 'عرض منصة TimeBucks للمهام والمكافآت الرقمية',
+        titleEn: 'TimeBucks Digital Tasks & Rewards Spotlight',
+        descAr: 'استكشف مهام بسيطة واستطلاعات وعروض متنوعة عبر الإنترنت مع متابعة مباشرة للرصيد.',
+        descEn: 'Explore simple online tasks, surveys, and interactive offers with real-time activity tracking.',
+        ctaAr: 'اكتشف العرض الآن',
+        ctaEn: 'Explore Offer',
+        url: 'https://timebucks.com'
+      },
+      {
+        id: 'ad-2',
+        type: 'ad',
+        badgeType: 'ad',
+        badgeAr: 'إعلان',
+        badgeEn: 'Sponsored Ad',
+        titleAr: 'أدوات سريعة لإنشاء صفحات هبوط وروابط ذكية',
+        titleEn: 'Fast Tools for Smart Links & Landing Pages',
+        descAr: 'اجمع روابطك ومشاريعك في صفحة واحدة أنيقة وسريعة التحميل على الجوال والكمبيوتر.',
+        descEn: 'Combine your links and projects into one clean, mobile-friendly hub in minutes.',
+        ctaAr: 'زيارة الإعلان',
+        ctaEn: 'Visit Sponsor',
+        url: 'https://linktr.ee'
+      },
+      {
+        id: 'ad-3',
+        type: 'ad',
+        badgeType: 'featured',
+        badgeAr: 'مميز',
+        badgeEn: 'Featured',
+        titleAr: 'حزمة أدلة المبتدئين للعمل والمحتوى الرقمي',
+        titleEn: 'Starter Guides Bundle for Digital Content',
+        descAr: 'ملخصات عملية ونماذج جاهزة لمساعدتك على تنظيم أفكارك ونشر محتواك باحترافية.',
+        descEn: 'Practical summaries and ready templates to help you organize ideas and publish cleanly.',
+        ctaAr: 'تصفح التفاصيل',
+        ctaEn: 'See Details',
+        url: 'https://www.notion.so'
+      },
+
+      // Curated Links Directory
+      {
+        id: 'lnk-1',
+        type: 'link',
+        icon: 'link',
+        titleAr: 'بوابة التسجيل السريع لـ TimeBucks',
+        titleEn: 'TimeBucks Quick Access Portal',
+        descAr: 'رابط مباشر للانتقال إلى الصفحة الرئيسية للمنصة واستعراض الأقسام المتاحة.',
+        descEn: 'Direct link to open the platform home page and browse available sections.',
+        url: 'https://timebucks.com'
+      },
+      {
+        id: 'lnk-2',
+        type: 'link',
+        icon: 'video',
+        titleAr: 'قناة الفيديوهات والشروحات القصيرة',
+        titleEn: 'Short Videos & Guides Channel',
+        descAr: 'مجموعة مقاطع قصيرة تشرح الخطوات الأساسية بأسلوب مبسط ومباشر.',
+        descEn: 'Curated short clips walking through core steps in a simple, direct format.',
+        url: 'https://www.youtube.com'
+      },
+      {
+        id: 'lnk-3',
+        type: 'link',
+        icon: 'docs',
+        titleAr: 'مستندات وتنظيم الملاحظات اليومية',
+        titleEn: 'Daily Notes & Checklist Workspace',
+        descAr: 'أداة عملية لتدوين المهام اليومية ومتابعة الروابط والعروض التي جرّبتها.',
+        descEn: 'Practical workspace to log daily tasks and track links and offers you tried.',
+        url: 'https://www.notion.so'
+      },
+      {
+        id: 'lnk-4',
+        type: 'link',
+        icon: 'share',
+        titleAr: 'صفحة مشاركة الروابط الاجتماعية',
+        titleEn: 'Social Links Sharing Hub',
+        descAr: 'مشاركة أبرز روابطك وعروضك مع المتابعين عبر رابط موحد سهل التذكر.',
+        descEn: 'Share your top links and offers with followers via one memorable URL.',
+        url: 'https://mksbeasy.example.com/hub'
+      }
+    ];
+
+    // =========================================================================
+    // 2. Bilingual Dictionary (Arabic & English)
+    // =========================================================================
+    const I18N = {
+      ar: {
+        pageTitle: 'mksbeasy | فيديوهات قصيرة • إعلانات • روابط',
+        tagline: 'فيديوهات قصيرة • إعلانات • روابط',
+        langSwitchLabel: 'العربية | English',
+        navVideos: 'الفيديوهات القصيرة',
+        navAds: 'الإعلانات والعروض',
+        navLinks: 'الروابط',
+        navManage: 'إضافة عنصر / تخصيص',
+        navManageShort: '+ إضافة عنصر',
+        heroBadge: 'منصة موحدة للمحتوى السريع والعروض والروابط',
+        heroTitle: 'كل <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-amber-300">الفيديوهات القصيرة والإعلانات والروابط</span> في مكان واحد سهل',
+        heroSubtitle: 'استعرض مقاطع الفيديو السريعة، واكتشف العروض والإعلانات المميزة، واحصل على أهم الروابط بنقرة واحدة مع إمكانية إضافة وتخصيص محتواك بسهولة وحفظه تلقائياً.',
+        ctaVideos: 'استكشف الفيديوهات',
+        ctaAds: 'تصفح الإعلانات',
+        ctaLinks: 'جميع الروابط',
+        ctaCustomize: 'تخصيص / إضافة محتوى',
+        hubLiveLabel: 'مركز mksbeasy المباشر',
+        bilingualBadge: 'عربي / إنجليزي',
+        statVideos: 'فيديوهات',
+        statAds: 'إعلانات',
+        statLinks: 'روابط',
+        spotlightLabel: 'نقر الإعلانات المسجل (محلي)',
+        clicksSuffix: 'نقرة إجمالية',
+        addQuickBtn: '+ إضافة',
+        filterAll: 'الكل',
+        filterVideos: 'فيديوهات قصيرة',
+        filterAds: 'إعلانات',
+        filterLinks: 'روابط',
+        searchPlaceholder: 'ابحث في الفيديوهات، الإعلانات، أو الروابط...',
+        noResultsTitle: 'لا توجد عناصر مطابقة لبحثك',
+        noResultsDesc: 'جرّب كلمات بحث أخرى أو ارجع إلى تبويب «الكل» لاستعراض كافة العناصر المتاحة.',
+        resetFilterBtn: 'إعادة ضبط الفلاتر',
+        videosKicker: 'مقاطع سريعة',
+        videosHeading: 'الفيديوهات القصيرة',
+        videosSub: 'اضغط على أي فيديو لتشغيل المعاينة الفورية أو فتح الرابط المباشر',
+        adsKicker: 'عروض مختارة',
+        adsHeading: 'الإعلانات والعروض',
+        adsSub: 'إعلانات وعروض مميزة مع تتبع محلي لعدد النقرات',
+        linksKicker: 'دليل الوصول السريع',
+        linksHeading: 'الروابط',
+        linksSub: 'انسخ الرابط بنقرة واحدة أو افتحه مباشرة في نافذة جديدة',
+        watchBtn: 'تشغيل المعاينة',
+        copyBtn: 'نسخ الرابط',
+        copiedToast: 'تم نسخ الرابط إلى الحافظة بنجاح',
+        openBtn: 'فتح الرابط',
+        openExternalBtn: 'فتح الرابط الخارجي',
+        adDisclosure: 'إعلان / مادة ترويجية',
+        clicksLabel: 'نقرات',
+        deleteBtn: 'حذف',
+        deletedToast: 'تم حذف العنصر',
+        addedToast: 'تمت إضافة العنصر وحفظه محلياً',
+        resetToast: 'تمت استعادة البيانات الافتراضية',
+        footerDesc: 'منصة بسيطة وسريعة لتنظيم الفيديوهات القصيرة والإعلانات والروابط باللغتين العربية والإنجليزية.',
+        footerQuickLinks: 'روابط سريعة',
+        footerDisclaimerTitle: 'إفصاح الإعلانات والروابط',
+        footerDisclaimerText: 'قد تتضمن بعض الروابط أو البطاقات مواد ترويجية أو إعلانات خارجية؛ يُرجى مراجعة شروط كل منصة قبل استخدامها.',
+        footerCopyright: '© 2026 mksbeasy. جميع الحقوق محفوظة.',
+        footerStorageNote: 'يتم حفظ العناصر المضافة وإحصاءات النقرات محلياً في متصفحك.',
+        managerTitle: 'إضافة عنصر جديد / تخصيص المحتوى',
+        managerSubtitle: 'أضف فيديو قصير، إعلان، أو رابط وسيتم حفظه تلقائياً في متصفحك',
+        fieldType: 'نوع العنصر',
+        typeVideo: 'فيديو قصير (Short Video)',
+        typeAd: 'إعلان / عرض مميز (Ad / Offer)',
+        typeLink: 'رابط (Link)',
+        fieldDurationOrBadge: 'المدة أو الوسم (مثال: 0:30 أو مميز)',
+        fieldTitleAr: 'العنوان بالعربية *',
+        fieldTitleEn: 'Title in English *',
+        fieldDescAr: 'الوصف بالعربية',
+        fieldDescEn: 'Description in English',
+        fieldUrl: 'الرابط (URL)',
+        resetSampleBtn: 'استعادة البيانات الافتراضية',
+        cancelBtn: 'إلغاء',
+        saveItemBtn: 'حفظ العنصر',
+        simulatedPlayBtn: 'تشغيل / إيقاف مؤقت للمعاينة',
+        simulatedPlaying: 'جاري تشغيل المعاينة التفاعلية...',
+        simulatedPaused: 'المعاينة متوقفة مؤقتاً'
+      },
+      en: {
+        pageTitle: 'mksbeasy | Short Videos • Ads • Links',
+        tagline: 'Short Videos • Ads • Links',
+        langSwitchLabel: 'English | العربية',
+        navVideos: 'Short Videos',
+        navAds: 'Ads & Offers',
+        navLinks: 'Links Hub',
+        navManage: 'Add / Customize',
+        navManageShort: '+ Add Item',
+        heroBadge: 'Unified Hub for Short Videos, Ads & Links',
+        heroTitle: 'All <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-amber-300">Short Videos, Ads & Links</span> in One Clean Hub',
+        heroSubtitle: 'Browse quick short videos, discover featured promotions and ads, and access curated links in one click—with built-in customization saved locally in your browser.',
+        ctaVideos: 'Explore Videos',
+        ctaAds: 'Browse Ads',
+        ctaLinks: 'All Links',
+        ctaCustomize: 'Customize / Add Content',
+        hubLiveLabel: 'mksbeasy Live Hub',
+        bilingualBadge: 'AR / EN',
+        statVideos: 'Videos',
+        statAds: 'Ads',
+        statLinks: 'Links',
+        spotlightLabel: 'Tracked Ad Clicks (Local)',
+        clicksSuffix: 'total clicks',
+        addQuickBtn: '+ Add',
+        filterAll: 'All',
+        filterVideos: 'Short Videos',
+        filterAds: 'Ads',
+        filterLinks: 'Links',
+        searchPlaceholder: 'Search videos, ads, or links...',
+        noResultsTitle: 'No matching items found',
+        noResultsDesc: 'Try different keywords or switch back to the "All" tab to view every item.',
+        resetFilterBtn: 'Reset Filters',
+        videosKicker: 'Quick Clips',
+        videosHeading: 'Short Videos',
+        videosSub: 'Click any video card to launch instant preview or open the external link',
+        adsKicker: 'Featured Promotions',
+        adsHeading: 'Ads & Offers',
+        adsSub: 'Highlighted ads and offers with local click tracking',
+        linksKicker: 'Quick Directory',
+        linksHeading: 'Links Hub',
+        linksSub: 'Copy any link in one click or open it in a new tab',
+        watchBtn: 'Watch Preview',
+        copyBtn: 'Copy Link',
+        copiedToast: 'Link copied to clipboard',
+        openBtn: 'Open Link',
+        openExternalBtn: 'Open External Link',
+        adDisclosure: 'Ad / Sponsored Promotion',
+        clicksLabel: 'clicks',
+        deleteBtn: 'Delete',
+        deletedToast: 'Item removed',
+        addedToast: 'Item added and saved locally',
+        resetToast: 'Sample data restored',
+        footerDesc: 'A fast, clean hub for organizing short videos, ads, and links in both Arabic and English.',
+        footerQuickLinks: 'Quick Links',
+        footerDisclaimerTitle: 'Ad & Link Disclosure',
+        footerDisclaimerText: 'Some cards or links may include promotional offers or external destinations; always review terms before participating.',
+        footerCopyright: '© 2026 mksbeasy. All rights reserved.',
+        footerStorageNote: 'Added items and click counts are stored locally in your browser.',
+        managerTitle: 'Add Item / Customize Content',
+        managerSubtitle: 'Add a short video, ad, or link and save it automatically in localStorage',
+        fieldType: 'Item Type',
+        typeVideo: 'Short Video',
+        typeAd: 'Ad / Featured Offer',
+        typeLink: 'Link',
+        fieldDurationOrBadge: 'Duration or Badge (e.g. 0:30 or Featured)',
+        fieldTitleAr: 'العنوان بالعربية *',
+        fieldTitleEn: 'Title in English *',
+        fieldDescAr: 'الوصف بالعربية',
+        fieldDescEn: 'Description in English',
+        fieldUrl: 'Destination URL',
+        resetSampleBtn: 'Reset Sample Data',
+        cancelBtn: 'Cancel',
+        saveItemBtn: 'Save Item',
+        simulatedPlayBtn: 'Play / Pause Preview',
+        simulatedPlaying: 'Playing interactive preview...',
+        simulatedPaused: 'Preview paused'
+      }
+    };
+
+    // =========================================================================
+    // 3. Application State & LocalStorage Persistence
+    // =========================================================================
+    const STORAGE_KEYS = {
+      lang: 'mksbeasy_lang_v1',
+      theme: 'mksbeasy_theme_v1',
+      items: 'mksbeasy_items_v1',
+      adClicks: 'mksbeasy_ad_clicks_v1'
+    };
+
+    let state = {
+      lang: localStorage.getItem(STORAGE_KEYS.lang) || 'ar',
+      theme: localStorage.getItem(STORAGE_KEYS.theme) || 'dark',
+      filter: 'all',
+      search: '',
+      items: loadItems(),
+      adClicks: loadAdClicks(),
+      simInterval: null,
+      simProgress: 0,
+      simPlaying: false
+    };
+
+    function loadItems() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEYS.items);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch (e) {
+        console.error('Failed to parse items from localStorage', e);
+      }
+      return structuredClone(DEFAULT_ITEMS);
+    }
+
+    function saveItems() {
+      try {
+        localStorage.setItem(STORAGE_KEYS.items, JSON.stringify(state.items));
+      } catch (e) {
+        console.error('Failed to save items', e);
+      }
+    }
+
+    function loadAdClicks() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEYS.adClicks);
+        return raw ? JSON.parse(raw) : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveAdClicks() {
+      try {
+        localStorage.setItem(STORAGE_KEYS.adClicks, JSON.stringify(state.adClicks));
+      } catch (e) {
+        console.error('Failed to save ad clicks', e);
+      }
+    }
+
+    // =========================================================================
+    // 4. Language & Theme Management
+    // =========================================================================
+    function applyLanguage(lang) {
+      state.lang = lang === 'en' ? 'en' : 'ar';
+      localStorage.setItem(STORAGE_KEYS.lang, state.lang);
+
+      const htmlEl = document.documentElement;
+      const bodyEl = document.getElementById('appBody');
+      const isAr = state.lang === 'ar';
+
+      htmlEl.lang = isAr ? 'ar' : 'en';
+      htmlEl.dir = isAr ? 'rtl' : 'ltr';
+      bodyEl.dir = isAr ? 'rtl' : 'ltr';
+
+      const dict = I18N[state.lang];
+      document.title = dict.pageTitle;
+      document.getElementById('navTagline').textContent = dict.tagline;
+      document.getElementById('langSwitchLabel').textContent = dict.langSwitchLabel;
+      document.getElementById('heroTitle').innerHTML = dict.heroTitle;
+      document.getElementById('heroSubtitle').textContent = dict.heroSubtitle;
+      document.getElementById('searchInput').placeholder = dict.searchPlaceholder;
+
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) {
+          el.textContent = dict[key];
+        }
+      });
+
+      renderAll();
+    }
+
+    function toggleLanguage() {
+      applyLanguage(state.lang === 'ar' ? 'en' : 'ar');
+    }
+
+    function applyTheme(theme) {
+      state.theme = theme === 'light' ? 'light' : 'dark';
+      localStorage.setItem(STORAGE_KEYS.theme, state.theme);
+
+      const body = document.getElementById('appBody');
+      const sunIcon = document.getElementById('sunIcon');
+      const moonIcon = document.getElementById('moonIcon');
+
+      if (state.theme === 'dark') {
+        body.classList.add('dark', 'bg-mesh-dark', 'text-slate-100');
+        body.classList.remove('bg-mesh-light', 'text-slate-900');
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      } else {
+        body.classList.remove('dark', 'bg-mesh-dark', 'text-slate-100');
+        body.classList.add('bg-mesh-light', 'text-slate-900');
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      }
+    }
+
+    function toggleTheme() {
+      applyTheme(state.theme === 'dark' ? 'light' : 'dark');
+    }
+
+    // =========================================================================
+    // 5. Filtering, Search & Rendering
+    // =========================================================================
+    function setFilter(filterName) {
+      state.filter = filterName;
+
+      document.querySelectorAll('.filter-tab').forEach((btn) => {
+        const isActive = btn.getAttribute('data-filter') === filterName;
+        if (isActive) {
+          btn.className = 'filter-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap cursor-pointer bg-emerald-500 text-slate-950 shadow-glow';
+        } else {
+          btn.className = 'filter-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap cursor-pointer bg-[#12221f] text-slate-300 hover:text-white border border-emerald-900/60';
+        }
+      });
+
+      renderAll();
+    }
+
+    function handleSearch(val) {
+      state.search = val.trim().toLowerCase();
+      const clearBtn = document.getElementById('clearSearchBtn');
+      clearBtn.classList.toggle('hidden', state.search.length === 0);
+      renderAll();
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('searchInput');
+      input.value = '';
+      handleSearch('');
+      input.focus();
+    }
+
+    function resetFilters() {
+      const input = document.getElementById('searchInput');
+      input.value = '';
+      state.search = '';
+      document.getElementById('clearSearchBtn').classList.add('hidden');
+      setFilter('all');
+    }
+
+    function matchesSearch(item) {
+      if (!state.search) return true;
+      const haystack = [
+        item.titleAr,
+        item.titleEn,
+        item.descAr,
+        item.descEn,
+        item.tagAr,
+        item.tagEn,
+        item.badgeAr,
+        item.badgeEn,
+        item.url
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+      return haystack.includes(state.search);
+    }
+
+    function getLocalizedTitle(item) {
+      return state.lang === 'ar'
+        ? (item.titleAr || item.titleEn || '')
+        : (item.titleEn || item.titleAr || '');
+    }
+
+    function getLocalizedDesc(item) {
+      return state.lang === 'ar'
+        ? (item.descAr || item.descEn || '')
+        : (item.descEn || item.descAr || '');
+    }
+
+    function updateStats() {
+      const dict = I18N[state.lang];
+      const videosCount = state.items.filter((i) => i.type === 'video').length;
+      const adsCount = state.items.filter((i) => i.type === 'ad').length;
+      const linksCount = state.items.filter((i) => i.type === 'link').length;
+
+      document.getElementById('countVideos').textContent = videosCount;
+      document.getElementById('countAds').textContent = adsCount;
+      document.getElementById('countLinks').textContent = linksCount;
+
+      const totalClicks = Object.values(state.adClicks).reduce((sum, n) => sum + (Number(n) || 0), 0);
+      document.getElementById('totalAdClicksDisplay').textContent = `${totalClicks} ${dict.clicksSuffix}`;
+    }
+
+    function renderAll() {
+      updateStats();
+      const dict = I18N[state.lang];
+
+      const videos = state.items.filter((i) => i.type === 'video' && matchesSearch(i));
+      const ads = state.items.filter((i) => i.type === 'ad' && matchesSearch(i));
+      const links = state.items.filter((i) => i.type === 'link' && matchesSearch(i));
+
+      const showVideosSection = (state.filter === 'all' || state.filter === 'video') && videos.length > 0;
+      const showAdsSection = (state.filter === 'all' || state.filter === 'ad') && ads.length > 0;
+      const showLinksSection = (state.filter === 'all' || state.filter === 'link') && links.length > 0;
+
+      document.getElementById('videos-section').classList.toggle('hidden', !showVideosSection);
+      document.getElementById('ads-section').classList.toggle('hidden', !showAdsSection);
+      document.getElementById('links-section').classList.toggle('hidden', !showLinksSection);
+
+      const anyVisible = showVideosSection || showAdsSection || showLinksSection;
+      document.getElementById('emptyState').classList.toggle('hidden', anyVisible);
+
+      // Render Videos Grid
+      document.getElementById('videosGrid').innerHTML = videos.map((vid) => {
+        const title = escapeHtml(getLocalizedTitle(vid));
+        const desc = escapeHtml(getLocalizedDesc(vid));
+        const tag = escapeHtml(state.lang === 'ar' ? (vid.tagAr || vid.tagEn || 'فيديو قصير') : (vid.tagEn || vid.tagAr || 'Short Clip'));
+        const duration = escapeHtml(vid.duration || '0:30');
+
+        return `
+          <article class="group rounded-2xl bg-[#111f1c] border border-emerald-900/50 hover:border-emerald-400/50 overflow-hidden flex flex-col justify-between transition-all hover:-translate-y-0.5 shadow-lg">
+            <div>
+              <!-- Video Thumbnail / Visual Header -->
+              <div
+                onclick="openVideoModal('${escapeAttr(vid.id)}')"
+                class="relative aspect-video bg-gradient-to-br from-[#0d2420] via-[#102d28] to-[#1f1c0e] flex items-center justify-center cursor-pointer overflow-hidden border-b border-emerald-900/40"
+              >
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.22),transparent_70%)]"></div>
+
+                <!-- Duration Badge -->
+                <span class="absolute top-3 start-3 px-2.5 py-1 rounded-lg bg-black/75 backdrop-blur-sm text-emerald-300 text-xs font-bold border border-emerald-500/25">
+                  ${duration}
+                </span>
+
+                <!-- Category Tag -->
+                <span class="absolute top-3 end-3 px-2.5 py-1 rounded-lg bg-amber-500/15 backdrop-blur-sm text-amber-300 text-xs font-bold border border-amber-400/25">
+                  ${tag}
+                </span>
+
+                <!-- Play Button -->
+                <div class="w-14 h-14 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center shadow-glow group-hover:scale-110 transition-transform z-10">
+                  <svg class="w-6 h-6 fill-current ms-0.5" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+              </div>
+
+              <div class="p-5 space-y-2">
+                <h3 class="text-base sm:text-lg font-extrabold text-white leading-snug line-clamp-2">${title}</h3>
+                <p class="text-xs sm:text-sm text-slate-300/85 leading-relaxed line-clamp-2">${desc}</p>
+              </div>
+            </div>
+
+            <div class="px-5 pb-5 pt-2 flex items-center justify-between gap-2">
+              <button
+                type="button"
+                onclick="openVideoModal('${escapeAttr(vid.id)}')"
+                class="flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 text-xs sm:text-sm font-bold transition cursor-pointer"
+              >
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <span>${dict.watchBtn}</span>
+              </button>
+
+              <button
+                type="button"
+                onclick="deleteItem('${escapeAttr(vid.id)}')"
+                title="${dict.deleteBtn}"
+                class="p-2.5 rounded-xl bg-white/5 hover:bg-rose-500/15 text-slate-400 hover:text-rose-300 border border-white/10 transition cursor-pointer"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6M14 11v6"></path></svg>
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      // Render Ads Grid
+      document.getElementById('adsGrid').innerHTML = ads.map((ad) => {
+        const title = escapeHtml(getLocalizedTitle(ad));
+        const desc = escapeHtml(getLocalizedDesc(ad));
+        const badgeText = escapeHtml(
+          state.lang === 'ar'
+            ? (ad.badgeAr || (ad.badgeType === 'featured' ? 'مميز' : 'إعلان'))
+            : (ad.badgeEn || (ad.badgeType === 'featured' ? 'Featured' : 'Ad'))
+        );
+        const ctaText = escapeHtml(
+          state.lang === 'ar' ? (ad.ctaAr || 'اكتشف العرض') : (ad.ctaEn || 'Explore Offer')
+        );
+        const clicksCount = Number(state.adClicks[ad.id] || 0);
+        const isFeatured = ad.badgeType === 'featured';
+
+        return `
+          <article class="rounded-2xl bg-gradient-to-b from-[#16231f] to-[#0f1916] border ${isFeatured ? 'border-amber-400/40' : 'border-emerald-800/50'} p-5 sm:p-6 flex flex-col justify-between gap-5 shadow-lg hover:border-amber-400/70 transition-all">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-1 rounded-lg text-xs font-extrabold ${isFeatured ? 'bg-amber-500/20 text-amber-300 border border-amber-400/35' : 'bg-emerald-500/15 text-emerald-300 border border-emerald-400/30'}">
+                    ${badgeText}
+                  </span>
+                  <span class="text-[11px] text-slate-400 font-medium">${dict.adDisclosure}</span>
+                </div>
+
+                <button
+                  type="button"
+                  onclick="deleteItem('${escapeAttr(ad.id)}')"
+                  title="${dict.deleteBtn}"
+                  class="p-1.5 rounded-lg text-slate-400 hover:text-rose-300 hover:bg-rose-500/10 transition cursor-pointer"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg>
+                </button>
+              </div>
+
+              <h3 class="text-lg font-extrabold text-white leading-snug">${title}</h3>
+              <p class="text-xs sm:text-sm text-slate-300/90 leading-relaxed">${desc}</p>
+            </div>
+
+            <div class="space-y-3 pt-2 border-t border-white/10">
+              <div class="flex items-center justify-between text-xs text-slate-400">
+                <span>${dict.clicksLabel}: <strong class="text-amber-300" id="adClickCount-${escapeAttr(ad.id)}">${clicksCount}</strong></span>
+                <span class="truncate max-w-[160px] text-slate-500" dir="ltr">${escapeHtml(ad.url || '')}</span>
+              </div>
+
+              <button
+                type="button"
+                onclick="handleAdClick('${escapeAttr(ad.id)}', '${escapeAttr(ad.url || 'https://mksbeasy.example.com')}')"
+                class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl ${isFeatured ? 'bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 shadow-goldGlow' : 'bg-emerald-500 hover:bg-emerald-400 text-slate-950'} font-extrabold text-sm transition cursor-pointer"
+              >
+                <span>${ctaText}</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      // Render Links Grid
+      document.getElementById('linksGrid').innerHTML = links.map((lnk) => {
+        const title = escapeHtml(getLocalizedTitle(lnk));
+        const desc = escapeHtml(getLocalizedDesc(lnk));
+        const safeUrl = escapeAttr(lnk.url || 'https://mksbeasy.example.com');
+
+        return `
+          <article class="rounded-2xl bg-[#111f1c] border border-teal-900/50 hover:border-teal-400/50 p-5 flex flex-col justify-between gap-4 transition-all">
+            <div class="space-y-2.5">
+              <div class="flex items-start justify-between gap-3">
+                <div class="w-10 h-10 rounded-xl bg-teal-500/15 border border-teal-400/25 text-teal-300 flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                </div>
+
+                <button
+                  type="button"
+                  onclick="deleteItem('${escapeAttr(lnk.id)}')"
+                  title="${dict.deleteBtn}"
+                  class="p-1.5 rounded-lg text-slate-400 hover:text-rose-300 hover:bg-rose-500/10 transition cursor-pointer"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg>
+                </button>
+              </div>
+
+              <h3 class="text-base font-extrabold text-white leading-snug">${title}</h3>
+              <p class="text-xs sm:text-sm text-slate-300/85 leading-relaxed line-clamp-2">${desc}</p>
+              <p class="text-xs text-teal-300/80 truncate" dir="ltr">${escapeHtml(lnk.url || '')}</p>
+            </div>
+
+            <div class="flex items-center gap-2 pt-2 border-t border-white/10">
+              <button
+                type="button"
+                onclick="copyToClipboard('${safeUrl}')"
+                class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-200 border border-white/15 text-xs font-bold transition cursor-pointer"
+              >
+                <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span>${dict.copyBtn}</span>
+              </button>
+
+              <a
+                href="${safeUrl}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-teal-500/15 hover:bg-teal-500/25 text-teal-200 border border-teal-400/30 text-xs font-bold transition"
+              >
+                <span>${dict.openBtn}</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // =========================================================================
+    // 6. Video Preview Modal (Direct Video, YouTube Embed, or Simulated Player)
+    // =========================================================================
+    function extractYouTubeId(url) {
+      if (!url) return null;
+      const match = url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
+      return match ? match[1] : null;
+    }
+
+    function openVideoModal(videoId) {
+      const vid = state.items.find((i) => i.id === videoId);
+      if (!vid) return;
+
+      stopSimulatedPlayer();
+      const dict = I18N[state.lang];
+      const modal = document.getElementById('videoModal');
+      const container = document.getElementById('videoPlayerContainer');
+
+      document.getElementById('modalVideoTitle').textContent = getLocalizedTitle(vid);
+      document.getElementById('modalVideoDesc').textContent = getLocalizedDesc(vid);
+      document.getElementById('modalVideoDuration').textContent = vid.duration || '0:30';
+
+      const extLink = document.getElementById('modalVideoExternalLink');
+      extLink.href = vid.url || 'https://www.youtube.com';
+
+      const ytId = extractYouTubeId(vid.url);
+      const isDirectMp4 = vid.url && /\.(mp4|webm|ogg)(\?.*)?$/i.test(vid.url);
+
+      if (ytId) {
+        container.innerHTML = `
+          <iframe
+            class="w-full h-full"
+            src="https://www.youtube.com/embed/${escapeAttr(ytId)}?autoplay=1&rel=0"
+            title="${escapeAttr(getLocalizedTitle(vid))}"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        `;
+      } else if (isDirectMp4) {
+        container.innerHTML = `
+          <video class="w-full h-full object-contain bg-black" controls autoplay playsinline>
+            <source src="${escapeAttr(vid.url)}" />
+          </video>
+        `;
+      } else {
+        // Clean interactive short-video preview player
+        const noteText = state.lang === 'ar'
+          ? (vid.highlightTextAr || 'معاينة فيديو قصير جاهزة — يمكنك ربط رابط YouTube أو ملف MP4 مباشر في أي وقت.')
+          : (vid.highlightTextEn || 'Short video preview ready — connect a YouTube or direct MP4 URL anytime.');
+
+        container.innerHTML = `
+          <div class="w-full h-full bg-gradient-to-br from-[#0b1f1b] via-[#102924] to-[#1f1b0d] p-6 sm:p-8 flex flex-col items-center justify-center text-center gap-4">
+            <div class="flex items-end gap-1.5 h-8">
+              <span class="eq-bar w-1.5 h-7 rounded-full bg-emerald-400"></span>
+              <span class="eq-bar w-1.5 h-7 rounded-full bg-teal-300"></span>
+              <span class="eq-bar w-1.5 h-7 rounded-full bg-amber-300"></span>
+              <span class="eq-bar w-1.5 h-7 rounded-full bg-emerald-400"></span>
+            </div>
+
+            <p class="text-sm sm:text-base font-bold text-white max-w-md">${escapeHtml(noteText)}</p>
+
+            <div class="w-full max-w-md bg-white/10 rounded-full h-2 overflow-hidden">
+              <div id="simProgressBar" class="h-full bg-gradient-to-r from-emerald-400 to-amber-300 w-1/4 transition-all duration-300"></div>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <button
+                type="button"
+                onclick="toggleSimulatedPlayer()"
+                class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs sm:text-sm cursor-pointer transition"
+              >
+                ${dict.simulatedPlayBtn}
+              </button>
+            </div>
+            <span id="simStatusLabel" class="text-xs text-emerald-300">${dict.simulatedPlaying}</span>
+          </div>
+        `;
+        startSimulatedPlayer();
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function startSimulatedPlayer() {
+      state.simPlaying = true;
+      state.simProgress = 20;
+      clearInterval(state.simInterval);
+      state.simInterval = setInterval(() => {
+        if (!state.simPlaying) return;
+        state.simProgress = state.simProgress >= 100 ? 15 : state.simProgress + 5;
+        const bar = document.getElementById('simProgressBar');
+        if (bar) bar.style.width = `${state.simProgress}%`;
+      }, 450);
+    }
+
+    function toggleSimulatedPlayer() {
+      const dict = I18N[state.lang];
+      state.simPlaying = !state.simPlaying;
+      const label = document.getElementById('simStatusLabel');
+      const bars = document.querySelectorAll('.eq-bar');
+      if (label) {
+        label.textContent = state.simPlaying ? dict.simulatedPlaying : dict.simulatedPaused;
+      }
+      bars.forEach((b) => {
+        b.style.animationPlayState = state.simPlaying ? 'running' : 'paused';
+      });
+    }
+
+    function stopSimulatedPlayer() {
+      state.simPlaying = false;
+      clearInterval(state.simInterval);
+      state.simInterval = null;
+    }
+
+    function closeVideoModal() {
+      stopSimulatedPlayer();
+      const modal = document.getElementById('videoModal');
+      const container = document.getElementById('videoPlayerContainer');
+      container.innerHTML = '';
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // =========================================================================
+    // 7. Ad Click Tracking, Clipboard Copy & Content Manager Actions
+    // =========================================================================
+    function handleAdClick(adId, url) {
+      state.adClicks[adId] = (Number(state.adClicks[adId]) || 0) + 1;
+      saveAdClicks();
+      updateStats();
+
+      const countEl = document.getElementById(`adClickCount-${adId}`);
+      if (countEl) countEl.textContent = state.adClicks[adId];
+
+      if (url) {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      }
+    }
+
+    function copyToClipboard(text) {
+      const dict = I18N[state.lang];
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(dict.copiedToast);
+        }).catch(() => {
+          fallbackCopy(text);
+          showToast(dict.copiedToast);
+        });
+      } else {
+        fallbackCopy(text);
+        showToast(dict.copiedToast);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+      } catch (e) {
+        // Ignore if unsupported
+      }
+      document.body.removeChild(ta);
+    }
+
+    function openManagerModal() {
+      const modal = document.getElementById('managerModal');
+      updateFormHints();
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeManagerModal() {
+      const modal = document.getElementById('managerModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function updateFormHints() {
+      const type = document.getElementById('itemType').value;
+      const badgeInput = document.getElementById('itemBadge');
+      if (type === 'video') {
+        badgeInput.placeholder = '0:30';
+      } else if (type === 'ad') {
+        badgeInput.placeholder = state.lang === 'ar' ? 'مميز أو إعلان' : 'Featured or Ad';
+      } else {
+        badgeInput.placeholder = state.lang === 'ar' ? 'رابط سريع' : 'Quick Link';
+      }
+    }
+
+    function handleAddItem(e) {
+      e.preventDefault();
+      const dict = I18N[state.lang];
+
+      const type = document.getElementById('itemType').value;
+      const badgeVal = document.getElementById('itemBadge').value.trim();
+      const titleAr = document.getElementById('itemTitleAr').value.trim();
+      const titleEn = document.getElementById('itemTitleEn').value.trim();
+      const descAr = document.getElementById('itemDescAr').value.trim();
+      const descEn = document.getElementById('itemDescEn').value.trim();
+      const url = document.getElementById('itemUrl').value.trim() || 'https://mksbeasy.example.com';
+
+      const newItem = {
+        id: `${type}-${Date.now()}`,
+        type,
+        titleAr: titleAr || titleEn,
+        titleEn: titleEn || titleAr,
+        descAr: descAr || descEn,
+        descEn: descEn || descAr,
+        url
+      };
+
+      if (type === 'video') {
+        newItem.duration = badgeVal || '0:30';
+        newItem.tagAr = 'مضاف حديثاً';
+        newItem.tagEn = 'New Clip';
+      } else if (type === 'ad') {
+        newItem.badgeType = badgeVal.toLowerCase().includes('feat') || badgeVal.includes('مميز') ? 'featured' : 'ad';
+        newItem.badgeAr = badgeVal || 'إعلان';
+        newItem.badgeEn = badgeVal || 'Ad';
+        newItem.ctaAr = 'اكتشف العرض';
+        newItem.ctaEn = 'Explore Offer';
+      }
+
+      state.items.unshift(newItem);
+      saveItems();
+      renderAll();
+
+      document.getElementById('addItemForm').reset();
+      closeManagerModal();
+      showToast(dict.addedToast);
+    }
+
+    function deleteItem(id) {
+      const dict = I18N[state.lang];
+      state.items = state.items.filter((i) => i.id !== id);
+      saveItems();
+      renderAll();
+      showToast(dict.deletedToast);
+    }
+
+    function resetSampleData() {
+      const dict = I18N[state.lang];
+      state.items = structuredClone(DEFAULT_ITEMS);
+      state.adClicks = {};
+      saveItems();
+      saveAdClicks();
+      renderAll();
+      closeManagerModal();
+      showToast(dict.resetToast);
+    }
+
+    // =========================================================================
+    // 8. Toast Helper & Security Escaping
+    // =========================================================================
+    function showToast(message) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'px-4 py-3 rounded-xl bg-[#132622] border border-emerald-400/40 text-white text-xs sm:text-sm font-bold shadow-xl flex items-center gap-2.5 transition-all';
+      toast.innerHTML = `
+        <span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
+        <span>${escapeHtml(message)}</span>
+      `;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(8px)';
+        setTimeout(() => toast.remove(), 250);
+      }, 2600);
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function escapeAttr(str) {
+      return escapeHtml(str);
+    }
+
+    // Close modals on backdrop click or Escape key
+    document.getElementById('videoModal').addEventListener('click', (e) => {
+      if (e.target.id === 'videoModal') closeVideoModal();
+    });
+
+    document.getElementById('managerModal').addEventListener('click', (e) => {
+      if (e.target.id === 'managerModal') closeManagerModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeVideoModal();
+        closeManagerModal();
+      }
+    });
+
+    // Initialize Application
+    applyTheme(state.theme);
+    applyLanguage(state.lang);
+  </script>
+</body>
+</html>
